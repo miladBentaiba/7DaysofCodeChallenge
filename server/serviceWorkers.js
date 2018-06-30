@@ -1,7 +1,8 @@
 import {
 CACHE_NAME,
 CACHE_NAME_V1,
-URLS_TO_CACHE } from './constants';
+URLS_TO_CACHE
+} from './constants';
 
 const allCaches = [
   CACHE_NAME_V1,
@@ -21,14 +22,12 @@ self.addEventListener('activate', (event) => {
 
 self.addEventListener('fetch', (event) => {
   const requestUrl = new URL(event.request.url);
-
   if (requestUrl.origin === location.origin) {
     if (requestUrl.pathname === './') {
       event.respondWith(caches.match('./'));
       return;
     }
   }
-
   event.respondWith(
     caches.match(event.request).then(response => response || fetch(event.request)),
   );
