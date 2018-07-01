@@ -4,11 +4,9 @@ export const CACHE_NAME = 'miled-site-cache-v1';
 export const CACHE_NAME_V1 = 'miled-site-cache-v1';
 export const URLS_TO_CACHE = [
   './',
-  './favicon.ico',
-  './js/app.js',
-  './css/app.css',
-  'https://fonts.gstatic.com/s/anton/v9/1Ptgg87LROyAm3Kz-C8.woff2',
-  'https://fonts.gstatic.com/s/poppins/v5/pxiEyp8kv8JHgFVrJJfecg.woff2',
+  './https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js',
+  'https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js',
+  'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css',
 ];
 export const DATABASE_NAME = 'miled-site-cache-v1';
 export const RATES_OBJECT_NAME = 'currency-rates';

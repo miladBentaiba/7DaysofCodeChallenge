@@ -1,7 +1,7 @@
 import {
-CACHE_NAME,
-CACHE_NAME_V1,
-URLS_TO_CACHE
+  CACHE_NAME,
+  CACHE_NAME_V1,
+  URLS_TO_CACHE,
 } from './constants';
 
 const allCaches = [

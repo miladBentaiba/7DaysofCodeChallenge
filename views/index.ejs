@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script>
+
+        navigator.serviceWorker.register('serviceWorkers.js').then((reg) => {
+            if (!navigator.serviceWorker.controller) {
+                return;
+            }
+            if (reg.waiting) {
+                updateReady(reg.waiting);
+                return;
+            }
+            if (reg.installing) {
+                trackInstalling(reg.installing);
+                return;
+            }
+            reg.addEventListener('updatefound', () => {
+                trackInstalling(reg.installing);
+            });
+        });
+        let refreshing;
+        navigator.serviceWorker.addEventListener('controllerchange', () => {
+            if (refreshing) return;
+            window.location.reload();
+            refreshing = true;
+        });
+
+    </script>
+</head>
+<body>
+
+<div class="row container"  style="text-align:center" >
+    <div align="center">
+        <div class="col-sm-3">
+            <div class="form-group">
+                <label for="exampleFormControlSelect1">From</label>
+                <select class="form-control" id="exampleFormControlSelect1">
+                    <%  for (let currency of data) { %>
+                    <option> <%= currency.currencyName%></option>
+                    <% } %>
+                </select>
+            </div>
+            <div class="form-group ">
+                <label>Amount</label>
+                <input type="number" class="form-control" min="0" value="1.00" aria-label="Amount">
+            </div>
+        </div>
+        <div class="col-sm-3">
+            <div class="form-group">
+                <label for="exampleFormControlSelect1">To</label>
+                <select class="form-control" id="exampleFormControlSelect1">
+                    <%  for (let currency of data) { %>
+                    <option> <%= currency.currencyName%></option>
+                    <% } %>
+                </select>
+            </div>
+            <div class="form-group ">
+                <label>Amount</label>
+                <input type="number" class="form-control" min="0" value="1.00" aria-label="Amount">
+            </div>
+        </div>
+    </div>
+
+
+</div>
+</body>
+</html>

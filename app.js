@@ -1,16 +1,26 @@
-var express = require('express');
-var app = express();
-var bodyParser = require('body-parser');
-app.use(bodyParser.json()); // support json encoded bodies
-app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
-app.use(express.static(__dirname + '/node_modules'));
+import express from 'express';
+import { getListCurrencies, getConvertedCurrency } from './server/currencyService';
+import {
+  getCachedListCurrencies, getCachedRates, storeCurrencies, storeRates,
+} from './server/indexDB';
+
+const app = express();
 app.set('view engine', 'ejs');
 
-app.get('/', function(req, res,next) {
-
+app.get('/', (req, res, next) => {
+  getListCurrencies().then((result) => {
+    const data = Object.values(result.data.results);
+    storeCurrencies(result);
+    res.render('index', {
+      data,
+    });
+  }).catch((error) => {
+    console.log(error.message);
+    getCachedListCurrencies().then((result) => {
+      res.render('index', {
+        data: Object.values(result.data.results),
+      });
+    });
+  });
 });
-
 app.listen(4200);
-
-
--

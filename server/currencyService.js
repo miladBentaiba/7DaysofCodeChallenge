@@ -1,12 +1,12 @@
 import axios from 'axios';
-import { CURRENCY_API_URL } from 'constants';
+import { CURRENCY_API_URL } from './constants';
 
 async function getListCurrencies() {
   try {
     const response = await axios.get(`${CURRENCY_API_URL}/currencies`);
     return {
       success: true,
-      message: response.data,
+      data: response.data,
     };
   } catch (error) {
     console.log('A problem while fetching currencies ', error.message);
@@ -31,7 +31,7 @@ async function getConvertedCurrency(amount, fromCurrency, toCurrency) {
     console.log('A problem while converting currencies ', error.message);
     return {
       success: false,
-      message: 'A problem while converting currencies ',
+      data: 'A problem while converting currencies ',
     };
   }
 }
